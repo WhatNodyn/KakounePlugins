@@ -1,7 +1,5 @@
-try %{
-	decl str realname %sh{ echo "'$(getent passwd "${SUDO_USER:-$LOGNAME}" | cut -d ":" -f 5 | cut -d "," -f 1)'" }
-	decl str	login %sh{ echo "${SUDO_USER:-$LOGNAME}@epitech.eu" }
-}
+try %{ decl str realname %sh{ echo "'$(getent passwd "${SUDO_USER:-$LOGNAME}" | cut -d ":" -f 5 | cut -d "," -f 1)'" } }
+try %{ decl str	login %sh{ echo "${SUDO_USER:-$LOGNAME}@epitech.eu" } }
 
 def	insert-epitech-header -params 0..1 -docstring "insert-epitech-header [<project>]: put an Epitech header at the beginning of the current file for the given project." %{
 	%sh{
