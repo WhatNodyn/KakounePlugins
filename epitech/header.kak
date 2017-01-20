@@ -1,7 +1,7 @@
-echo -debug "enter ok"
-decl str realname %sh{ echo "'$(getent passwd "${SUDO_USER:-$LOGNAME}" | cut -d ":" -f 5 | cut -d "," -f 1)'" }
-echo -debug "realname ok"
-decl str	login %sh{ echo "${SUDO_USER:-$LOGNAME}@epitech.eu" }
+try %{
+	decl str realname %sh{ echo "'$(getent passwd "${SUDO_USER:-$LOGNAME}" | cut -d ":" -f 5 | cut -d "," -f 1)'" }
+	decl str	login %sh{ echo "${SUDO_USER:-$LOGNAME}@epitech.eu" }
+}
 
 def	insert-epitech-header -params 0..1 -docstring "insert-epitech-header [<project>]: put an Epitech header at the beginning of the current file for the given project." %{
 	%sh{
@@ -53,10 +53,23 @@ def	insert-epitech-header -params 0..1 -docstring "insert-epitech-header [<proje
 		header="$header$comment_middle Made by $kak_opt_realname<ret>"
 		header="$header$comment_middle Login   <lt>$kak_opt_login><ret>"
 		header="$header$comment_middle <ret>"
-		header="$header$comment_middle Started on  $date $kak_opt_realname<ret>"
-		header="$header$comment_middle Last update $date $kak_opt_realname<ret>"
+		header="$header$comment_middle Started on  $now $kak_opt_realname<ret>"
+		header="$header$comment_middle Last update $now $kak_opt_realname<ret>"
 		header="$header$comment_end<ret><ret>"
 
-		echo "exec -no-hooks 'Zggi$header<esc>zi'"
+		echo "exec -no-hooks 'Zggi$header<esc>z'"
+		echo "echo ''"
 	}    
 }
+
+def	update-epitech-header -hidden %{
+	try %{
+		%sh{
+			now=$(date "+%a %b %e %T %Y")
+			echo "exec -no-hooks 'Zgg/Last update .{3} .{3} {1,2}\d{1,2} \d{1,2}:\d{1,2}:\d{1,2} \d{4} .*?$<ret>cLast update $now $kak_opt_realname<esc>z'"
+			echo "echo ''"
+		}
+	}
+}
+
+hook global BufWritePre .* %{ update-epitech-header }
