@@ -72,4 +72,4 @@ def	update-epitech-header -hidden %{
 	}
 }
 
-hook global BufWritePre .* %{ update-epitech-header }
+hook -group epitech global BufWritePre .* %{ update-epitech-header }
