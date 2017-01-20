@@ -38,7 +38,7 @@ def	insert-epitech-header -params 0..1 -docstring "insert-epitech-header [<proje
 			comment_end="$kak_opt_comment_line_chars"
 		else
 			comment_start="${kak_opt_comment_selection_chars%:*}"
-			comment_middle=$(tail -c 1 <<< "$comment_start")
+			comment_middle=$(printf %s "$comment_start" | tail -c 1)
 			comment_end="${kak_opt_comment_selection_chars##*:}"
 		fi
 		comment_start=$(prepare_comment_string "$comment_start")
