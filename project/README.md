@@ -10,6 +10,7 @@ It takes either the Git repository's root name, or if that fails, the current di
  - function `guess-project`: Try to guess the current project's name. It's hooked to run at buffer creation.
  - hook group `project`: Its only hook is `guess-project` at buffer creation. It's just here so you can remove that.
 
-## Optional dependencies 
+## Dependencies 
 
- - `git` (Allow project name to be guessed from repository name)
+ - `coreutils`
+ - `git` (Optional, allow project name to be guessed from repository name)
