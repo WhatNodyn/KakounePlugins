@@ -14,3 +14,4 @@ It takes either the Git repository's root name, or if that fails, the current di
 
  - `coreutils`
  - `git` (Optional, allow project name to be guessed from repository name)
+ - `which` (Needed to check for git)
