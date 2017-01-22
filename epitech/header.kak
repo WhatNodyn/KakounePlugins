@@ -1,3 +1,6 @@
+# epitech.kak version 1.0.0
+# By Nodyn
+
 try %{ decl str realname %sh{ echo "'$(getent passwd "${SUDO_USER:-$LOGNAME}" | cut -d ":" -f 5 | cut -d "," -f 1)'" } }
 try %{ decl str	epitech_login %sh{ echo "${SUDO_USER:-$LOGNAME}@epitech.eu" } }
 

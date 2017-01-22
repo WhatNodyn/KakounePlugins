@@ -1,3 +1,6 @@
+# project.kak version 0.4.0
+# By Nodyn
+
 decl str	project
 
 def		guess-project %{
