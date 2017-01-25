@@ -58,7 +58,7 @@ def	insert-epitech-header -params 0..1 -docstring "insert-epitech-header [<proje
 		header="$header$comment_middle Last update $now $kak_opt_realname<ret>"
 		header="$header$comment_end<ret><ret>"
 
-		echo "exec -no-hooks 'Zggi$header<esc>z'"
+		echo "exec -no-hooks -draft 'ggi$header<esc>'"
 		echo "echo ''"
 	}    
 }
@@ -67,7 +67,7 @@ def	update-epitech-header -hidden %{
 	try %{
 		%sh{
 			now=$(date "+%a %b %e %T %Y")
-			echo "exec -no-hooks 'Zgg/Last update .{3} .{3} {1,2}\d{1,2} \d{1,2}:\d{1,2}:\d{1,2} \d{4} .*?$<ret>cLast update $now $kak_opt_realname<esc>z'"
+			echo "exec -no-hooks -draft '%sLast update .{3} .{3} {1,2}\d{1,2} \d{1,2}:\d{1,2}:\d{1,2} \d{4} .*?$<ret>cLast update $now $kak_opt_realname<esc>;'"
 			echo "echo ''"
 		}
 	}
