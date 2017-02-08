@@ -35,14 +35,14 @@ def	insert-epitech-header -params 0..1 -docstring "insert-epitech-header [<proje
 		[[ "$kak_buffile" == "$kak_bufname" ]] && directory="nowhere" || directory=$(dirname "$kak_buffile")
 
 		# Once that's done, we can prepare the comment fields.
-		if [[ -n "$kak_opt_comment_line_chars" ]] && [[ "$kak_opt_filetype" != "c" ]]; then
-			comment_start="$kak_opt_comment_line_chars"
-			comment_middle="$kak_opt_comment_line_chars"
-			comment_end="$kak_opt_comment_line_chars"
+		if [[ -n "$kak_opt_comment_line" ]] && [[ "$kak_opt_filetype" != "c" ]]; then
+			comment_start="$kak_opt_comment_line"
+			comment_middle="$kak_opt_comment_line"
+			comment_end="$kak_opt_comment_line"
 		else
-			comment_start="${kak_opt_comment_selection_chars%:*}"
+			comment_start="${kak_opt_comment_block%:*}"
 			comment_middle=$(printf %s "$comment_start" | tail -c 1)
-			comment_end="${kak_opt_comment_selection_chars##*:}"
+			comment_end="${kak_opt_comment_block##*:}"
 		fi
 		comment_start=$(prepare_comment_string "$comment_start")
 		comment_middle=$(prepare_comment_string "$comment_middle")
