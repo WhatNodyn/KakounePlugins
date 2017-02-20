@@ -1,0 +1,3 @@
+[submodule "wakatime"]
+	path = wakatime
+	url = git@github.com:WhatNodyn/kakoune-wakatime.git
