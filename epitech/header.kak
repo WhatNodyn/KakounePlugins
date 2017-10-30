@@ -4,7 +4,7 @@
 try %{ decl str realname %sh{ echo "'$(getent passwd "${SUDO_USER:-$LOGNAME}" | cut -d ":" -f 5 | cut -d "," -f 1)'" } }
 try %{ decl str	epitech_login %sh{ echo "${SUDO_USER:-$LOGNAME}@epitech.eu" } }
 
-def	insert-epitech-header -params 0..1 -docstring "insert-epitech-header [<project>]: put an Epitech header at the beginning of the current file for the given project." %{
+def	insert-epitech-header -params 0..2 -docstring "insert-epitech-header [<project>]: put an Epitech header at the beginning of the current file for the given project." %{
 	%sh{
 		prepare_comment_string()
 		{
@@ -30,9 +30,8 @@ def	insert-epitech-header -params 0..1 -docstring "insert-epitech-header [<proje
 
 		# Next, we set the variables related to our data.
 		[[ -n "$1" ]] && project="$1" || project="$kak_opt_project"
-		now=$(date "+%a %b %e %T %Y")
-		file=$(basename "$kak_buffile")
-		[[ "$kak_buffile" == "$kak_bufname" ]] && directory="nowhere" || directory=$(dirname "$kak_buffile")
+		now=$(date "+%Y")
+		description="$2"
 
 		# Once that's done, we can prepare the comment fields.
 		if [[ -n "$kak_opt_comment_line" ]] && [[ "$kak_opt_filetype" != "c" ]]; then
@@ -49,13 +48,10 @@ def	insert-epitech-header -params 0..1 -docstring "insert-epitech-header [<proje
 		comment_end=$(prepare_comment_string "$comment_end")
 
 		header="$comment_start<ret>"
-		header="$header$comment_middle $file for $project in $directory<ret>"
-		header="$header$comment_middle <ret>"
-		header="$header$comment_middle Made by $kak_opt_realname<ret>"
-		header="$header$comment_middle Login   <lt>$kak_opt_epitech_login><ret>"
-		header="$header$comment_middle <ret>"
-		header="$header$comment_middle Started on  $now $kak_opt_realname<ret>"
-		header="$header$comment_middle Last update $now $kak_opt_realname<ret>"
+		header="$header$comment_middle EPITECH PROJECT, $now<ret>"
+		header="$header$comment_middle $project<ret>"
+		header="$header$comment_middle File description:<ret>"
+		header="$header$comment_middle $description<ret>"
 		header="$header$comment_end<ret><ret>"
 
 		echo "exec -no-hooks -draft 'ggi$header<esc>'"
