@@ -24,7 +24,7 @@ def	insert-epitech-header -params 0..2 -docstring "insert-epitech-header [<proje
 		
 		# First, let's figure out if we have a project name.
 		if [[ -z "$kak_opt_project" ]] && [[ -z "$1" ]]; then
-			echo "echo -color Error 'The project name wasn\\'t set for this buffer. Please specify one.'"
+			echo "echo -markup '{Error}The project name wasn\\'t set for this buffer. Please specify one.'"
 			exit
 		fi
 
